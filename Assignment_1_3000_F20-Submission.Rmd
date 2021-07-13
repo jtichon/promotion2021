@@ -1,0 +1,193 @@
+---
+title: "Assignment 1 STAT 3000 F20 - Submission"
+author: "PUT YOUR NAME AND STUDENT ID HERE"
+date: "PUT DUE DATE HERE"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Questions
+
+Q1. (*This question is to be solved by hand unless otherwise stated. You may use R to get required means and standard deviations but should include the code for that. Otherwise I require you to show your work.*) The dataframe for this question is called **starwars.clean** and the columns are **height** and **mass**.  The following is the first 8 lines of the cleaned version of the \texttt{starwars} dataset which is a builtin data set for the package \texttt{dplyr} (which is a subset of the \texttt{tidyverse} packages). The height is given in cm and the mass is given in kg.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+starwars.clean <- starwars %>%
+  select(name, height, mass) %>%
+  slice(1:8)
+knitr::kable(starwars.clean, "pipe")
+```
+
+(a) (*4 marks*) Calculate the least-squares regression line  for predicting mass by height by hand and state the regression line. Please keep all decimal places in your calculations but round to 4 decimal places when stating the final line. You may use R to calculate the means and standard deviations and make use of my table below where \texttt{x.dev} is $(x-\bar{x})$, \texttt{y.dev} is $(y-\bar{y})$ and \texttt{xy.dev} is $(x-\bar{x})(y-\bar{y})$:
+
+```{r, echo=FALSE}
+starwars.dev<- starwars.clean %>%
+  mutate(x.dev = (mass-mean(mass)), y.dev = (height-mean(height)), 
+         xy.dev = (mass-mean(mass))*(height-mean(height)))
+knitr::kable(starwars.dev, "pipe")
+```
+
+*Solution*
+```{r}
+
+```
+$\bar{x}=$, $\bar{y}=$, $s_x=$, $s_y=$
+
+$\sum(x-\bar{x})*(y-\bar{y})=$
+
+$r=$
+
+$\hat{\beta_1}=$
+
+$\hat{\beta_0}=$
+
+$\hat{y}=$
+
+(b) (*1 mark*) Find the predicted value for a character with a mass of 90.
+
+*Solution*
+
+$\hat{y}=$
+
+(c) (*2 marks*) Find the residual for R2-D2.
+
+*Solution*
+
+<!-- Delete and answer question -->
+
+(d) (*2 marks*) Interpret the slope of the least-squares regression line.
+
+*Solution*
+
+<!-- Delete and answer question -->
+
+
+Q2. (*This question should be solved entirely with R*) This question involves using the \texttt{PalmerPenguins} data set. First you must install it by entering the following line of code in your console: \texttt{install.packages("palmerpenguins")}.
+
+The following code chunk will add the package to your library and remove the rows with missing data from the dataset **penguins**. Do not remove this code. The dataframe you will be working with is called **penguins** and I've displayed the first 6 rows below.
+
+```{r, warning=FALSE, message=FALSE}
+library(palmerpenguins)
+penguins<- penguins %>%
+  drop_na()
+head(penguins)
+```
+
+(a) (*2 marks*) Fit a linear regression to predict the penguin's body mass (**body_mass_g**) based on its flipper length (**flipper_length_mm**) and state the least-squares regression line.
+
+*Solution*
+
+```{r}
+
+```
+
+$\hat{y}=$
+
+(b) (*1 mark*) What is the value of $\hat{\sigma}_{\epsilon}$?
+
+*Solution*
+
+$\hat{\sigma}_{\epsilon}=$
+
+(c) (*3 marks*) Make a scatterplot using the \texttt{plot()} command for the data and add the least-squares regression line to your plot. You can add the regression line with the command \texttt{abline(model)} where you replace the word model with the name of the object that contains your regression model. Relabel the x and y axis to be Flipper Length and Body Mass respectively using the \texttt{xlab=} and \texttt{ylab=} options.
+
+*Solution*
+
+```{r}
+
+```
+
+(d) (*4 marks*) Make an appropriate graph to test if the data is linear and if the errors have constant variance. Explain whether those two conditions are met by making reference to the plot.
+
+*Solution*
+```{r}
+
+```
+
+<!-- Delete and answer question -->
+
+(e) (*4 marks*) Make two plots to examine if the error terms are normal. Explain whether the condition is met by making reference to both the plots.
+
+*Solution*
+```{r}
+
+```
+
+<!-- Delete and answer question -->
+
+(f) (*1 mark*) State the other three model conditions.
+
+*Solution*
+
+* 
+* 
+* 
+
+(g) (*2 marks*) Have R output the fitted values and residuals for the first 5 observations. (*Hint: For a vector, adding [a:b] to the name of the object displays the a through b data points.*)
+
+*Solution*
+
+```{r}
+
+```
+
+Q3. (*Based on 1.28 in the text*) For this question you will use the **seaice** data set. To import it, make sure that you are using the project rooted in the Assignment 1 folder and that you leave the R code in the next R chunk that attaches the data set and shows the first 6 rows for your information:
+
+```{r}
+load(file = "seaice.rda")
+head(seaice)
+```
+
+This datafile gives information about the amount of sea ice in the arctic region as measured in September since 1979. The variable **Extent** measures the area inside the outer boundaries created by the ice. To measure time we have the variable **BaseYear** that measures time since 1978 in years.
+
+(a) (*3 marks*) Produce a scatterplot for predicting **Extent** from the base year **BaseYear**. Title the plot "Extent from BaseYear" and label the x and y axis as "Base Year" and "Extent" respectively.
+
+*Solution*
+```{r}
+
+```
+
+(b) (*4 marks*) Fit the linear model to an object called seaice.lm . Create a residual plot and comment, based on the plot, whether this appears to be a good linear fit.
+
+*Solution*
+
+```{r}
+
+```
+
+<!-- Delete and answer question -->
+
+(c) (*6 marks*) Make a scatterplot for predicting $\mathbf{Extent^2}$ from **BaseYear** and label it "Extent^2 from BaseYear". Label your x and y-axis as "Base Year" and "Extent^2" respectively. Fit the linear model to an object called seaice2.lm and make a residual plot. (*Hint: Re-use your code for part (a) and (b) but replace any instance of Extent with I(Extent^2) and any instance of seaice\$Extent with I(seaice\$Extent^2)* )
+
+*Solution*
+
+```{r}
+
+```
+
+(d) (*6 marks*) Make a scatterplot for predicting Extent from $\mathbf{\text{BaseYear}^2}$ and label it "Extent from BaseYear^2". Label your x and y-axis as "BaseYear^2" and "Extent" respectively. Fit the linear model to an object called seaice3.lm and make a residual plot. (*Hint: Re-use your code for part (a) and (b) but replace any instance of BaseYear with I(BaseYear^2) and any instance of seaice\$BaseYear with I(seaice\$BaseYear^2)* )
+
+*Solution*
+
+```{r}
+
+```
+
+(e) (*4 marks*) Comment on which of the three plots seems to be the best linear fit by referencing the residual plots and scatterplots. State the least-squares regression line for your choice.
+
+*Solution*
+
+<!-- Delete and answer question -->
+
+```{r}
+
+```
+
+My least-squares regression line is:
+
+\[\hat{y}=\]
